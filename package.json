@@ -39,7 +39,8 @@
                     ".lisp",
                     ".cl",
                     ".asd",
-                    ".asdf"
+                    ".asdf",
+                    ".moonli"
                 ],
                 "icon": {
                     "light": "images/lisp-icon.png",
