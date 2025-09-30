@@ -148,7 +148,7 @@ export const activate = async (ctx: Pick<vscode.ExtensionContext, 'subscriptions
 
             await saveReplHistory(state.replHistoryFile, ui.getHistoryItems())
 
-            lsp.evalWithOutput(item.text, item.pkgName)
+            lsp.evalWithOutput(item.text, item.pkgName, '')
         }),
 
         vscode.commands.registerCommand('alive.clearReplHistory', () => {
@@ -201,7 +201,7 @@ export const activate = async (ctx: Pick<vscode.ExtensionContext, 'subscriptions
             }
 
             ui.moveHistoryNodeToTop(node)
-            lsp.evalWithOutput(node.item.text, node.item.pkgName)
+            lsp.evalWithOutput(node.item.text, node.item.pkgName, '')
         }),
 
         vscode.commands.registerCommand('alive.editHistory', (node) => {
@@ -431,7 +431,7 @@ async function diagnosticsRefresh(
 function registerUIEvents(ui: UI, lsp: LSP, state: ExtensionState) {
     ui.on('saveReplHistory', (items: HistoryItem[]) => saveReplHistory(state.replHistoryFile, items))
     ui.on('listPackages', async (fn) => fn(await lsp.listPackages()))
-    ui.on('eval', (text, pkgName, storeResult) => lsp.evalWithOutput(text, pkgName, storeResult))
+    ui.on('eval', (text, pkgName, storeResult) => lsp.evalWithOutput(text, pkgName, '', storeResult))
     ui.on('inspect', (text, pkgName) => lsp.inspect(text, pkgName))
     ui.on('inspectClosed', (info) => lsp.inspectClosed(info))
     ui.on('inspectEval', (info, text) => lsp.inspectEval(info, text))

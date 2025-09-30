@@ -18,11 +18,13 @@ export function toggleReplWordWrap(ui: Pick<UI, 'toggleReplWordWrap'>) {
 
 export async function sendToRepl(lsp: Pick<LSP, 'getEvalInfo' | 'evalWithOutput'>) {
     await useEditor([COMMON_LISP_ID], async (editor) => {
-        const info = await lsp.getEvalInfo(editor.document.getText, editor.document.uri.toString(), editor.selection)
+        const uri = editor.document.uri.toString()
+        console.log("uri, sendToREPL", uri)
+        const info = await lsp.getEvalInfo(editor.document.getText, uri, editor.selection)
 
         if (info !== undefined) {
             await vscode.workspace.saveAll()
-            await lsp.evalWithOutput(info.text, info.package)
+            await lsp.evalWithOutput(info.text, info.package, uri)
         }
     })
 }
@@ -32,13 +34,15 @@ export async function inlineEval(
     state: Pick<ExtensionState, 'hoverText'>
 ): Promise<void> {
     await useEditor([COMMON_LISP_ID], async (editor) => {
-        const info = await lsp.getEvalInfo(editor.document.getText, editor.document.uri.toString(), editor.selection)
+        const uri = editor.document.uri.toString()
+        console.log("uri, inlineEval", uri)
+        const info = await lsp.getEvalInfo(editor.document.getText, uri, editor.selection)
 
         if (info === undefined) {
             return
         }
 
-        const results = await lsp.eval(info.text, info.package)
+        const results = await lsp.eval(info.text, info.package, uri)
 
         if (results === undefined) {
             return
@@ -54,11 +58,12 @@ export async function inlineEval(
 
 export async function evalSurrounding(lsp: Pick<LSP, 'getSurroundingInfo' | 'evalWithOutput'>): Promise<void> {
     await useEditor([COMMON_LISP_ID], async (editor) => {
-        const info = await lsp.getSurroundingInfo(editor.document.getText, editor.document.uri.toString(), editor.selection)
+        const uri = editor.document.uri.toString()
+        const info = await lsp.getSurroundingInfo(editor.document.getText, uri, editor.selection)
 
         if (info !== undefined) {
             await vscode.workspace.saveAll()
-            await lsp.evalWithOutput(info.text, info.package)
+            await lsp.evalWithOutput(info.text, info.package, uri)
         }
     })
 }
@@ -68,13 +73,14 @@ export async function inlineEvalSurrounding(
     state: Pick<ExtensionState, 'hoverText'>
 ): Promise<void> {
     await useEditor([COMMON_LISP_ID], async (editor) => {
-        const info = await lsp.getSurroundingInfo(editor.document.getText, editor.document.uri.toString(), editor.selection)
+        const uri = editor.document.uri.toString()
+        const info = await lsp.getSurroundingInfo(editor.document.getText, uri, editor.selection)
 
         if (info === undefined) {
             return
         }
 
-        const results = await lsp.eval(info.text, info.package)
+        const results = await lsp.eval(info.text, info.package, uri)
 
         if (results === undefined) {
             return

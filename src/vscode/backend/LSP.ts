@@ -287,6 +287,7 @@ export class LSP extends EventEmitter<LSPEvents> {
     eval = async (
         text: string,
         pkgName: string,
+        uri: string,
         storeResult?: boolean,
         withOutput: boolean = false
     ): Promise<string | Array<string> | undefined> => {
@@ -294,7 +295,8 @@ export class LSP extends EventEmitter<LSPEvents> {
             if (withOutput) {
                 this.emit('input', text, pkgName)
             }
-            const resp = await this.client?.sendRequest('$/alive/eval', { text, package: pkgName, storeResult })
+            console.log("URI:", uri)
+            const resp = await this.client?.sendRequest('$/alive/eval', { text, package: pkgName, textDocument: { uri: uri }, storeResult })
 
             if (!isObject(resp) || (!isString(resp.text) && !isArray(resp.text, isString))) {
                 return
@@ -306,8 +308,8 @@ export class LSP extends EventEmitter<LSPEvents> {
         }
     }
 
-    evalWithOutput = async (text: string, pkgName: string, storeResult?: boolean): Promise<void> => {
-        const results = await this.eval(text, pkgName, storeResult, true)
+    evalWithOutput = async (text: string, pkgName: string, uri: string, storeResult?: boolean): Promise<void> => {
+        const results = await this.eval(text, pkgName, uri, storeResult, true)
         if (results === undefined) {
             return
         }

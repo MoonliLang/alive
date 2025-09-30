@@ -1167,7 +1167,7 @@ describe('LSP tests', () => {
             const { lsp } = await doConnect({ sendRequest: jest.fn(() => ({ text: 'Result text' })) })
 
             lsp.emit = jest.fn()
-            await lsp.evalWithOutput('Some text', 'Some package')
+            await lsp.evalWithOutput('Some text', 'Some package', 'Some file')
 
             expect(lsp.emit).toHaveBeenCalledTimes(2)
         })
@@ -1178,18 +1178,18 @@ describe('LSP tests', () => {
             })
 
             lsp.emit = jest.fn()
-            await lsp.evalWithOutput('Some text', 'Some package')
+            await lsp.evalWithOutput('Some text', 'Some package', 'Some file')
 
             expect(lsp.emit).toHaveBeenCalledTimes(4)
         })
 
         it('Failure', async () => {
             await networkErrorTest(
-                (lsp) => lsp.evalWithOutput('Some text', 'Some package'),
+                (lsp) => lsp.evalWithOutput('Some text', 'Some package', 'Some file'),
                 (resp) => expect(resp).toBeUndefined()
             )
             await networkErrorTest(
-                (lsp) => lsp.evalWithOutput('Some text', 'Some package'),
+                (lsp) => lsp.evalWithOutput('Some text', 'Some package', 'Some file'),
                 (resp) => expect(resp).toBeUndefined(),
                 false
             )
@@ -1199,7 +1199,7 @@ describe('LSP tests', () => {
             const lsp = new LSP({ hoverText: '' })
 
             lsp.emit = jest.fn()
-            await lsp.evalWithOutput('Some text', 'Some package')
+            await lsp.evalWithOutput('Some text', 'Some package', 'Some file')
 
             expect(lsp.emit).toHaveBeenCalledTimes(1)
         })
@@ -1208,7 +1208,7 @@ describe('LSP tests', () => {
             const { lsp } = await doConnect({ sendRequest: jest.fn(() => ({ text: 'Result text' })) })
 
             lsp.emit = jest.fn()
-            await lsp.eval('Some text', 'Some package', false, true)
+            await lsp.eval('Some text', 'Some package', '', false, true)
             expect(lsp.emit).toHaveBeenCalledTimes(1)
         })
 
@@ -1219,7 +1219,7 @@ describe('LSP tests', () => {
                 })),
             })
 
-            const result = await lsp.eval('(+ 1 2)', 'cl-user')
+            const result = await lsp.eval('(+ 1 2)', 'cl-user', '')
             expect(result).toEqual(['result1', 'result2'])
         })
 
@@ -1230,7 +1230,7 @@ describe('LSP tests', () => {
                 })),
             })
 
-            const result = await lsp.eval('(+ 1 2)', 'cl-user')
+            const result = await lsp.eval('(+ 1 2)', 'cl-user', '')
             expect(result).toBe('result')
         })
 
@@ -1241,7 +1241,7 @@ describe('LSP tests', () => {
                 })),
             })
 
-            const result = await lsp.eval('(+ 1 2)', 'cl-user')
+            const result = await lsp.eval('(+ 1 2)', 'cl-user', '')
             expect(result).toBeUndefined()
         })
 
@@ -1250,7 +1250,7 @@ describe('LSP tests', () => {
                 sendRequest: jest.fn(() => 'not an object'),
             })
 
-            const result = await lsp.eval('(+ 1 2)', 'cl-user')
+            const result = await lsp.eval('(+ 1 2)', 'cl-user', '')
             expect(result).toBeUndefined()
         })
     })
