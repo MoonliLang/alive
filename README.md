@@ -1,10 +1,8 @@
-# Alive: The Average Lisp VSCode Environment
+# Alive Moonli: Moonli Interactive Development Environment for VS Code based on Alive
 
-An attempt to create a Common Lisp extension for VSCode. It's still a work in progress, though getting better.
+This is the [Alive](https://marketplace.visualstudio.com/items?itemName=rheller.alive) adaptation for [Moonli](https://moonli-lang.github.io).
 
-The name is partly a self-deprecating take on SLIME's name, but also reflects the goal of the project which is to reach Minimum Viable Product status. For VSCode language extensions, there is a lot that is expected for the bare minimum, including formatting, code completion, syntax highlighting, etc.
-
-The LSP server that the extension relies on currently only supports [Steel Bank Common Lisp (SBCL)](https://www.sbcl.org/). The extension isn't intended to be compiler-specific, but it is at the moment. The server can be found here, https://github.com/nobody-famous/alive-lsp
+It provides an Interactive Development Environment for working with Moonli projects. This is also often called image-based development.
 
 ## Extension Requirements
 
@@ -15,7 +13,7 @@ The following must be installed prior to using the Alive extension. It is okay f
   - Note: SBCL comes with ASDF already installed.
 
 * The LSP server uses the following Common Lisp libraries, which need to be installed for it to work.
-  - Libraries: 
+  - Libraries:
 
     - bordeaux-threads
     - usocket
@@ -298,6 +296,6 @@ Unless otherwise noted, all files are in the Public Domain.
 
 If you are interesting in making changes to Alive you should take a look at the [Development Notes](README-dev.md).
 
-## Release Notes
+## Credits
 
-No actual releases, yet.
+Full credits to Rich Heller ([nobody-famous](https://github.com/nobody-famous/)) for creating and maintaining [Alive](https://github.com/nobody-famous/alive) and [Alive LSP](https://github.com/nobody-famous/alive-lsp). This project `Alive Moonli` merely adds a few extension points to Alive.

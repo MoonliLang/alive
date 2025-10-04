@@ -27,9 +27,9 @@ export const activate = async (ctx: Pick<vscode.ExtensionContext, 'subscriptions
     log('Activating extension')
     vscode.commands.executeCommand('setContext', 'aliveExtensionActive', true)
 
-    const extensionMetadata = vscode.extensions.getExtension('rheller.alive')
+    const extensionMetadata = vscode.extensions.getExtension('moonli-lang.alive-moonli')
     if (extensionMetadata === undefined) {
-        log('Failed to find rheller.alive extension config directory')
+        log('Failed to find moonli-lang.alive-moonli extension config directory')
         return
     }
 

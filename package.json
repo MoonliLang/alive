@@ -1,12 +1,12 @@
 {
-    "name": "alive",
-    "displayName": "Alive",
-    "description": "Average Lisp VSCode Environment",
+    "name": "alive-moonli",
+    "displayName": "Alive Moonli",
+    "description": "Moonli Interactive Development Environment based on Alive",
     "version": "0.6.2",
-    "publisher": "rheller",
+    "publisher": "moonli-lang",
     "license": "Unlicense",
     "repository": {
-        "url": "https://github.com/nobody-famous/alive"
+        "url": "https://github.com/moonli-lang/alive"
     },
     "engines": {
         "vscode": "^1.80.0"
