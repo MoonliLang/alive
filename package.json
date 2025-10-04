@@ -563,7 +563,7 @@
                 "alive.lsp.downloadUrl": {
                     "type": "string",
                     "description": "Https url from which to download alive-lsp release",
-                    "default": "https://api.github.com/repos/nobody-famous/alive-lsp/releases"
+                    "default": "https://api.github.com/repos/moonli-lang/alive-lsp/releases"
                 },
                 "alive.lsp.remote.host": {
                     "type": [
@@ -586,7 +586,7 @@
                     "default": [
                         "sbcl",
                         "--eval",
-                        "(ql:quickload '(:bordeaux-threads :usocket :cl-json :flexi-streams))",
+                        "(ql:quickload '(:bordeaux-threads :usocket :cl-json :flexi-streams :moonli/alive-lsp))",
                         "--eval",
                         "(require :asdf)",
                         "--eval",

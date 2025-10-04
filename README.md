@@ -20,12 +20,17 @@ The following must be installed prior to using the Alive extension. It is okay f
     - cl-json
     - flexi-streams
 
-  - If you are new to Common Lisp, then the [Quicklisp](https://www.quicklisp.org/beta/) library manager is recommended. Follow the installation instructions to install Quicklisp. Then the above libraries can be installed by executing the following expressions in an `sbcl` shell:
+  - If you are new to Common Lisp, then the [Quicklisp](https://www.quicklisp.org/beta/) library manager is recommended. Follow the installation instructions to install Quicklisp. Finally, install ultralisp:
+
+        (ql-dist:install-dist "http://dist.ultralisp.org/" :prompt nil)
+
+    Then the above libraries can be installed by executing the following expressions in an `sbcl` shell:
 
     - `(ql:quickload "bordeaux-threads")`
     - `(ql:quickload "usocket")`
     - `(ql:quickload "cl-json")`
     - `(ql:quickload "flexi-streams")`
+    - `(ql:quickload "moonli")`
 
 
     Make sure you run `(ql:add-to-init-file)` or add `(load "~/quicklisp/setup.lisp")` to the `~/.sbclrc` file to make sure these dependencies are loaded on startup.
@@ -43,6 +48,8 @@ The following must be installed prior to using the Alive extension. It is okay f
     * (ql:quickload "cl-json")
     ...
     * (ql:quickload "flexi-streams")
+    ...
+    * (ql:quickload "moonli")
     ...
     ```
     </details>
